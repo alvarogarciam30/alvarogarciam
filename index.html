@@ -83,13 +83,14 @@ h2::after{
   border-radius:2px;
 }
 
-/* CARDS */
+/* GRID */
 .grid{
   display:grid;
-  gap:12px;
+  gap:14px;
   margin-top:20px;
 }
 
+/* CARD PREMIUM */
 .card{
   display:flex;
   align-items:center;
@@ -99,25 +100,52 @@ h2::after{
   text-decoration:none;
   background:var(--card);
   border:1px solid var(--border);
-  transition:0.25s;
+  transition:all 0.3s ease;
+  position:relative;
+  overflow:hidden;
+}
+
+/* glow suave detrás */
+.card::before{
+  content:"";
+  position:absolute;
+  inset:-40px;
+  background:radial-gradient(circle at var(--x,50%) var(--y,50%),
+    rgba(43,111,255,0.25),
+    rgba(255,59,59,0.15),
+    transparent 60%);
+  opacity:0;
+  transition:opacity 0.3s ease;
+  filter:blur(20px);
+}
+
+.card:hover::before{
+  opacity:1;
 }
 
 .card:hover{
-  transform:translateY(-4px);
+  transform:translateY(-5px) scale(1.01);
   border-color:var(--red);
 }
 
+/* logo */
 .card img{
-  width:48px;
-  height:48px;
+  width:50px;
+  height:50px;
   border-radius:12px;
   object-fit:cover;
+  transition:transform 0.3s ease, filter 0.3s ease;
 }
 
+.card:hover img{
+  transform:scale(1.12);
+  filter:brightness(1.1) saturate(1.2);
+}
+
+/* texto */
 .card strong{
   display:block;
   font-size:15px;
-  color:var(--text);
 }
 
 .card span{
@@ -136,7 +164,6 @@ h2::after{
   .container{padding:40px 16px;}
 }
 </style>
-
 </head>
 
 <body>
@@ -162,7 +189,7 @@ h2::after{
     </a>
 
     <a class="card" href="https://www.xataka.com/autor/alvaro-garcia">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGUuJ47JpfkIJcMmSD85KKMkIGSVjz3xO2jw&s">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Xataka_logo.svg">
       <div>
         <strong>Xataka</strong>
         <span>Tecnología y análisis</span>
@@ -188,6 +215,19 @@ h2::after{
   </div>
 
 </div>
+
+<script>
+/* glow dinámico suave */
+document.querySelectorAll('.card').forEach(card=>{
+  card.addEventListener('mousemove', e=>{
+    const rect = card.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    card.style.setProperty('--x', x + '%');
+    card.style.setProperty('--y', y + '%');
+  });
+});
+</script>
 
 </body>
 </html>
