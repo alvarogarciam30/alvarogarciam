@@ -1,116 +1,200 @@
-<style>
-  :root {
-    --bg: #ffffff;
-    --text: #111;
-    --muted: #444;
-    --primary: #2b6fff;
-    --accent: #ff3b3b;
-  }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Álvaro García M.</title>
 
-  @media (prefers-color-scheme: dark) {
+  <style>
     :root {
-      --bg: #0f1115;
-      --text: #f2f2f2;
-      --muted: #b5b5b5;
+      --bg: #ffffff;
+      --text: #111;
+      --muted: #555;
+      --primary: #2b6fff;
+      --accent: #ff3b3b;
+      --card: rgba(0,0,0,0.04);
+      --border: rgba(0,0,0,0.1);
     }
-  }
 
-  body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    color: var(--text);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: radial-gradient(circle at top left, rgba(43,111,255,0.15), transparent 40%),
-                radial-gradient(circle at bottom right, rgba(255,59,59,0.12), transparent 40%),
-                var(--bg);
-
-    transition: background 0.3s ease, color 0.3s ease;
-  }
-
-  .container {
-    max-width: 680px;
-    padding: 60px 20px;
-    animation: fadeUp 0.8s ease-out;
-  }
-
-  @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(15px);
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f1115;
+        --text: #f2f2f2;
+        --muted: #b5b5b5;
+        --card: rgba(255,255,255,0.06);
+        --border: rgba(255,255,255,0.12);
+      }
     }
-    to {
-      opacity: 1;
-      transform: translateY(0);
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top left, rgba(43,111,255,0.15), transparent 40%),
+                  radial-gradient(circle at bottom right, rgba(255,59,59,0.12), transparent 40%),
+                  var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
     }
-  }
 
-  .profile {
-    text-align: center;
-    margin-bottom: 40px;
-  }
+    .container {
+      max-width: 720px;
+      width: 100%;
+      padding: 60px 20px;
+    }
 
-  img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid var(--primary);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  }
+    .profile {
+      text-align: center;
+      margin-bottom: 40px;
+    }
 
-  h1 {
-    margin: 15px 0 5px;
-    font-size: 30px;
-    letter-spacing: -0.5px;
-  }
+    .profile img {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--primary);
+    }
 
-  p.bio {
-    color: var(--muted);
-    font-size: 16px;
-    max-width: 520px;
-    margin: 0 auto;
-  }
+    h1 {
+      margin: 15px 0 5px;
+      font-size: 30px;
+    }
 
-  h2 {
-    margin-top: 40px;
-    font-size: 18px;
-  }
+    p {
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto;
+    }
 
-  h2::after {
-    content: "";
-    display: block;
-    width: 40px;
-    height: 3px;
-    background: linear-gradient(to right, var(--primary), var(--accent));
-    margin-top: 6px;
-    border-radius: 2px;
-  }
+    h2 {
+      margin-top: 40px;
+      font-size: 18px;
+    }
 
-  .links {
-    margin-top: 20px;
-  }
+    h2::after {
+      content: "";
+      display: block;
+      width: 40px;
+      height: 3px;
+      margin-top: 6px;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      border-radius: 2px;
+    }
 
-  /* HOVER CARDS */
-  .links a {
-    display: block;
-    margin: 12px 0;
-    padding: 12px 14px;
-    border-radius: 10px;
-    text-decoration: none;
-    color: var(--primary);
-    background: rgba(127,127,127,0.05);
-    border: 1px solid rgba(127,127,127,0.15);
-    transition: all 0.2s ease;
-  }
+    /* CARDS */
+    .grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 20px;
+    }
 
-  .links a:hover {
-    transform: translateY(-2px);
-    border-color: var(--accent);
-    color: var(--accent);
-    background: rgba(255,59,59,0.06);
-  }
-</style>
+    .card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px;
+      border-radius: 16px;
+      text-decoration: none;
+      background: var(--card);
+      border: 1px solid var(--border);
+      transition: all 0.25s ease;
+    }
+
+    .card img {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    .card strong {
+      display: block;
+      font-size: 15px;
+      color: var(--text);
+    }
+
+    .card span {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .card div {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    /* MOBILE */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 26px;
+      }
+
+      .container {
+        padding: 40px 16px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="profile">
+      <img src="https://i.blogs.es/322f86/blob/288_288.jpeg" alt="Foto">
+      <h1>Álvaro García M.</h1>
+      <p>Periodista tecnológico especializado en Apple, Android y cultura digital.</p>
+    </div>
+
+    <h2>Mis trabajos</h2>
+
+    <div class="grid">
+
+      <a class="card" href="https://www.applesfera.com/autor/alvaro-garcia">
+        <img src="https://yt3.googleusercontent.com/AchftUgiT2t0fzQtg091oMaLSUv0PHweWArc8qvI5CD5-EyIMFkWrs5V969b9Wf5cr6gPsFtug=s900-c-k-c0x00ffffff-no-rj">
+        <div>
+          <strong>Applesfera</strong>
+          <span>Artículos sobre Apple y ecosistema</span>
+        </div>
+      </a>
+
+      <a class="card" href="https://www.xataka.com/autor/alvaro-garcia">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGUuJ47JpfkIJcMmSD85KKMkIGSVjz3xO2jw&s">
+        <div>
+          <strong>Xataka</strong>
+          <span>Tecnología, análisis y actualidad</span>
+        </div>
+      </a>
+
+      <a class="card" href="https://www.xatakamovil.com/autor/alvaro-garcia">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlIQhgviqLt-EXM7LHVnNRc8OjkdJUhA8ceA&s">
+        <div>
+          <strong>Xataka Móvil</strong>
+          <span>Smartphones y movilidad</span>
+        </div>
+      </a>
+
+      <a class="card" href="https://www.xatakandroid.com/autor/alvaro-garcia">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqoMNSiupnhdY1NZjORyh2jCctivdCoEI-7w&s">
+        <div>
+          <strong>Xataka Android</strong>
+          <span>Android, apps y ecosistema Google</span>
+        </div>
+      </a>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
