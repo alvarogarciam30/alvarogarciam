@@ -38,15 +38,39 @@ body{
   justify-content:center;
 }
 
+/* CONTENEDOR CON ANIMACIÓN PRINCIPAL */
 .container{
   max-width:720px;
   width:100%;
   padding:60px 20px;
+
+  opacity:0;
+  transform:translateY(20px);
+  animation:pageIn 0.9s ease-out forwards;
 }
 
+@keyframes pageIn{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* PROFILE ANIMADO */
 .profile{
   text-align:center;
   margin-bottom:40px;
+
+  opacity:0;
+  transform:translateY(15px);
+  animation:fadeIn 0.8s ease-out 0.2s forwards;
+}
+
+@keyframes fadeIn{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 .profile img{
@@ -68,9 +92,14 @@ h1{
   margin:0 auto;
 }
 
+/* TITULO */
 h2{
   margin-top:40px;
   font-size:18px;
+
+  opacity:0;
+  transform:translateY(10px);
+  animation:fadeIn 0.8s ease-out 0.35s forwards;
 }
 
 h2::after{
@@ -88,6 +117,10 @@ h2::after{
   display:grid;
   gap:12px;
   margin-top:20px;
+
+  opacity:0;
+  transform:translateY(10px);
+  animation:fadeIn 0.8s ease-out 0.5s forwards;
 }
 
 /* CARD */
@@ -101,8 +134,8 @@ h2::after{
   background:var(--card);
   border:1px solid var(--border);
   transition:0.3s ease;
-  overflow:hidden;
   position:relative;
+  overflow:hidden;
 }
 
 /* glow */
@@ -128,16 +161,15 @@ h2::after{
   border-color:var(--red);
 }
 
-/* ICONOS (IMPORTANTE: fallback para que nunca fallen) */
+/* ICONOS */
 .icon{
   width:48px;
   height:48px;
   border-radius:12px;
   object-fit:cover;
-  background:#ddd;
 }
 
-/* texto */
+/* TEXTO */
 .card strong{
   display:block;
   font-size:15px;
